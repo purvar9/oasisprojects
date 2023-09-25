@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ body {background-color:black;}
+.box {
+  background-color: #fff ;
+  width: 250px;
+  height: 400px;
+  border: 1px solid black;
+  padding: 100px;
+  margin: 450px;
+  margin-top: 100px;
+}
+.completed {
+    text-decoration: line-through;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<div>
+<h1  style="font-family:Comic sans MS">TO DO List.</h1>
+<form><input type="text" id="listInput" placeholder="type here"></form>
+<button onclick="addTask()"  style="background-color:#AED6F1">Add</button>
+<button onclick="myFunction()" style="background-color:#AED6F1">Clear</button>
+<ul id="taskList"></ul>
+
+<script>
+function addTask() {
+    const taskInput = document.getElementById("listInput");
+    const taskText = taskInput.value.trim();
+
+    if (taskText !== "") {
+        const taskList = document.getElementById("taskList");
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <span>${taskText}</span>
+            <button onclick="completeTask(this)" style="background-color:#AED6F1">Complete</button>
+            <button onclick="removeTask(this)" style="background-color:#AED6F1">Remove</button>
+        `;
+        taskList.appendChild(li);
+        taskInput.value = "";
+    }
+}
+
+function completeTask(button) {
+    const taskText = button.parentElement.querySelector("span");
+    taskText.classList.toggle("completed");
+}
+function removeTask(button) {
+    const task = button.parentElement;
+    task.parentElement.removeChild(task);
+}
+  function myFunction() {
+  var x = document.getElementById("taskList");
+  x.remove(x.selectedIndex);
+}
+</script>
+
+</div>
+</body>
+</html>
